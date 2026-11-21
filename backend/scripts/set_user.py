@@ -2,7 +2,6 @@
 Prompts without echo (or reads stdin when piped), so the password never lands in shell history."""
 import getpass
 import sys
-from contextlib import closing
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -22,11 +21,11 @@ def main() -> None:
     if not password:
         sys.exit("empty password")
 
-    init_db()
-    with closing(connect()) as conn:
+    with connect() as conn:
+        init_db(conn)
         conn.execute(
-            """INSERT INTO users (username, password_hash) VALUES (?, ?)
-               ON CONFLICT(username) DO UPDATE SET password_hash = excluded.password_hash,
+            """INSERT INTO users (username, password_hash) VALUES (%s, %s)
+               ON CONFLICT (lower(username)) DO UPDATE SET password_hash = excluded.password_hash,
                  failed_attempts = 0, locked_until = NULL""",
             (username, hash_password(password)),
         )

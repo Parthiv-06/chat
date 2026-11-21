@@ -58,6 +58,9 @@ type ChatScreenProps = {
 
 const initial = (name: string) => name.trim().charAt(0).toUpperCase() || "?"
 
+// Served by the backend only to logged-in users; the initial shows if it's missing or loading.
+const avatarUrl = (userId: number) => `/api/avatars/${userId}`
+
 export default function ChatScreen({ me, peer, onLogout }: ChatScreenProps) {
   const [messages, setMessages] = React.useState<Message[]>([])
   const [input, setInput] = React.useState("")
@@ -105,7 +108,12 @@ export default function ChatScreen({ me, peer, onLogout }: ChatScreenProps) {
       <Chat onSubmit={handleSubmit}>
         <div className="mx-auto flex min-h-0 w-full max-w-2xl flex-1 flex-col gap-3 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:gap-4 sm:px-4 sm:py-6">
           <header className="flex items-center gap-3 px-1">
-            <ChatMessageAvatar className="size-9 self-center" fallback={initial(peerName)} alt={peerName} />
+            <ChatMessageAvatar
+              className="size-9 self-center"
+              src={peer ? avatarUrl(peer.id) : undefined}
+              fallback={initial(peerName)}
+              alt={peerName}
+            />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold">{peerName}</p>
               <p className="text-muted-foreground text-xs">you are {me.username}</p>
@@ -130,7 +138,7 @@ export default function ChatScreen({ me, peer, onLogout }: ChatScreenProps) {
                 const name = mine ? me.username : peerName
                 return (
                   <ChatMessageRow key={m.id} variant={mine ? "self" : "peer"}>
-                    <ChatMessageAvatar fallback={initial(name)} alt={name} />
+                    <ChatMessageAvatar src={avatarUrl(m.authorId)} fallback={initial(name)} alt={name} />
                     <ChatMessageBubble className="max-w-[calc(100vw-7.5rem)] sm:max-w-96">
                       {m.content}
                     </ChatMessageBubble>
