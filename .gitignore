@@ -1,0 +1,23 @@
+# Dependencies and build output (rebuilt by Vercel / Railway on deploy)
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Secrets and local data: the SQLite DB holds password hashes and messages
+.env
+.env.*
+backend/data/
+*.db
+*.db-wal
+*.db-shm
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

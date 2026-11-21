@@ -1,0 +1,147 @@
+:root{
+  --navy:#111a40; --navy2:#16224f; --blue:#2c4ad0; --gold:#f0b43c; --gold-d:#c9a24a;
+  --ink:#141b3c; --muted:#6a7390; --bg:#f6f8fd; --line:#e8ecf6;
+}
+/* Element resets live in Tailwind's base layer; unlayered they would beat utilities like px-4. */
+@layer base{
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+}
+.ico{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ico.sm{width:12px;height:12px}.ico.gold{color:var(--gold-d);width:22px;height:22px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+
+/* nav */
+.nav{background:var(--navy);height:52px;border-bottom:1px solid rgba(255,255,255,.07);color:#fff}
+.nav-inner{max-width:1280px;height:100%;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:center;gap:56px}
+.brand{display:flex;align-items:center;gap:8px}
+.brand-name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:19px;color:#f1d58a;white-space:nowrap}
+.brand-name small{font-size:12px;font-weight:400;color:#c9b377}
+.links{display:flex;align-items:center;gap:28px;font-size:14px;color:#dfe5fa}
+.links a{display:flex;align-items:center;gap:6px}
+.links a:hover{color:#fff}
+.btn-logout{background:var(--gold-d);color:#1b1b1b;font-weight:600;font-size:14px;padding:10px 16px;border-radius:12px;margin-left:-8px}
+.btn-theme{width:32px;height:32px;border:1px solid rgba(255,255,255,.25);border-radius:8px;color:#dfe5fa;margin-left:-14px;flex:none}
+.menu-btn{display:none;width:34px;height:34px;place-items:center;border-radius:8px;color:#dfe5fa;flex:none}
+.menu-btn .ico{width:20px;height:20px}
+
+/* hero */
+.hero{background:linear-gradient(100deg,#142050 0%,#1d2e78 45%,#2f48b0 100%);color:#fff;padding-top:36px;padding-bottom:72px;position:relative;min-height:394px}
+.hero .wrap{max-width:1060px}
+.crumbs{font-size:14px;display:flex;gap:10px;align-items:center;color:#e9edff}
+.crumbs span{opacity:.5}
+.eyebrow{margin-top:26px;color:#f1c453;font-weight:700;letter-spacing:.12em;font-size:12.5px;text-transform:uppercase}
+h1{margin-top:18px;font-size:43px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.lead{margin-top:28px;font-size:17px;line-height:1.55;color:#cdd6f5}
+.cta-row{margin-top:30px;display:flex;align-items:center;gap:22px}
+.btn-gold{background:linear-gradient(180deg,#f5bf4a,#eaa62c);color:#1a1a1a;font-weight:700;font-size:15.5px;padding:15px 18px;border-radius:12px;box-shadow:0 8px 22px rgba(240,180,60,.35)}
+.btn-gold:hover{filter:brightness(1.05)}
+.cta-note{font-size:14px;color:#dfe5fa}
+.search{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:600px;max-width:calc(100% - 32px);height:54px;background:#fff;border-radius:14px 14px 0 0;display:flex;align-items:center;gap:12px;padding:0 16px;color:#8a93ad;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.search .ico{width:18px;height:18px}
+.search input{flex:1;border:0;outline:0;font:inherit;font-size:16px;color:var(--ink);background:none}
+.search input::placeholder{color:#9aa2bb}
+.search kbd{font:12px monospace;border:1px solid var(--line);border-radius:6px;padding:3px 8px;color:#8a93ad}
+
+/* main */
+.main{padding-top:48px;padding-bottom:10px}
+.tabs{display:flex;gap:10px}
+.tab{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 21px;font-size:16px;font-weight:700;color:#4a5370;height:46px;display:flex;align-items:center;gap:5px}
+.tab small{font-size:12.5px;font-weight:600;color:#8a93ad}
+.tab b{font-weight:700}
+.tab.active{background:linear-gradient(180deg,#3558dc,#2543c2);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(44,74,208,.3)}
+.tab.active small{color:#cfd8ff}
+
+.stats{margin-top:20px;background:#fff;border-radius:18px;box-shadow:0 6px 24px rgba(30,45,110,.06);display:flex;overflow:hidden;height:106px}
+.stat{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--line)}
+.stat strong{font-size:31px;font-weight:800;color:var(--navy2)}
+.stat i{width:22px;height:3px;border-radius:2px;background:var(--gold);margin:8px 0 12px}
+.stat span{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#7a839f}
+.stat.bi{flex:.42;background:#fbf5e3;border:0}
+.stat.bi b{color:#b8913a;font-size:17px}
+.stat.bi span{color:#b8913a;font-size:10.5px;margin-top:4px;letter-spacing:.04em}
+
+.cards{margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:19px;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px;cursor:pointer;transition:transform .15s,box-shadow .15s;min-height:285px}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(30,45,110,.1)}
+.ci{width:43px;height:43px;border-radius:12px;background:#eef1fa;display:grid;place-items:center;font-size:20px}
+.card h3{margin-top:24px;font-size:18px;font-weight:800}
+.card p{margin-top:8px;font-size:13.5px;line-height:1.6;color:#7a839f}
+.chips{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.chips em{font-style:normal;font-size:12px;font-weight:600;background:#eef1fa;color:#2a3358;padding:6px 10px;border-radius:999px}
+.chips em.g{background:#fbf2d8;color:#b8913a}
+.open{display:inline-block;margin-top:22px;font-size:14px;font-weight:700;color:var(--navy2)}
+
+/* footer */
+.foot{margin-top:10px;background:var(--navy);color:#cdd6f5;text-align:center;padding:30px 18px 18px;font-size:13.5px}
+.foot-brand{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.foot-brand .brand-name{font-size:16px}
+.foot .tag b{color:#fff;font-weight:500}
+.buddy{display:inline-block;margin-top:14px;color:var(--gold-d);text-decoration:underline;font-size:13.5px}
+.pass{display:block;width:100%;margin-top:18px;background:#a9a9ad;color:#2b2b2b;font-weight:700;font-size:14px;padding:12px;border-radius:10px}
+.social{margin-top:16px;display:flex;justify-content:center;gap:8px}
+.social a{display:flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 18px;font-weight:600;font-size:14px;color:#fff}
+.copy{margin-top:14px;font-size:13px;color:#aab3d4}
+
+/* secret screen login: sits in the empty band above the halftone word */
+.secret{position:relative;width:100%}
+.secret-top{position:absolute;left:0;right:0;top:0;height:55vh;height:55dvh;display:grid;place-items:center;z-index:2;pointer-events:none}
+.login{pointer-events:auto}
+.login{display:flex;flex-direction:column;align-items:stretch;gap:14px;width:min(300px,calc(100% - 32px));font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace}
+.login-field{background:transparent;border:0;border-bottom:1px solid rgba(233,228,218,.22);color:#e9e4da;font:inherit;font-size:13px;letter-spacing:.14em;padding:10px 2px;outline:0;transition:border-color .25s}
+.login-field::placeholder{color:rgba(233,228,218,.35);text-transform:uppercase;letter-spacing:.2em;font-size:11px}
+.login-field:focus{border-bottom-color:rgba(233,228,218,.7)}
+.login-field:-webkit-autofill{-webkit-text-fill-color:#e9e4da;box-shadow:0 0 0 40px #0c0c0b inset;caret-color:#e9e4da}
+.login-start{margin-top:10px;align-self:center;border:1px solid rgba(233,228,218,.3);border-radius:999px;color:#e9e4da;font:inherit;font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:10px 30px;transition:background .25s,color .25s,border-color .25s}
+.login-start:hover:not(:disabled){background:#e9e4da;color:#0c0c0b;border-color:#e9e4da}
+.login-start:disabled{opacity:.5;cursor:default}
+.login-error{min-height:16px;text-align:center;font-size:11px;letter-spacing:.08em;color:#e9762b}
+
+#toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#0c1230;color:#fff;padding:10px 18px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:.2s;z-index:50}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Below laptop width the text links don't fit, so the menu button stands in for them.
+   Logout and the theme button always stay visible; the theme button is the way into the chat. */
+@media(max-width:1180px){
+  .nav-inner{justify-content:space-between;gap:16px}
+  .links{gap:10px}
+  .links a{display:none}
+  .menu-btn{display:grid}
+  .btn-logout,.btn-theme{margin-left:0}
+}
+@media(max-width:1000px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:34px}
+  .lead br{display:none}
+}
+@media(max-width:600px){
+  .nav{height:56px}.nav-inner{padding:0 16px}
+  .brand{gap:6px}.brand .ico.gold{width:19px;height:19px}
+  .brand-name{font-size:15.5px}
+  .links{gap:6px}
+  .btn-logout{padding:8px 12px;font-size:13px}
+  .wrap{padding:0 16px}
+  .hero{padding-top:22px;padding-bottom:84px;min-height:0}
+  .crumbs{font-size:13px}
+  .eyebrow{margin-top:18px;font-size:11.5px}
+  h1{margin-top:12px;font-size:28px}
+  .lead{margin-top:14px;font-size:15.5px}
+  .cta-row{flex-direction:column;align-items:flex-start;gap:12px;margin-top:22px}
+  .btn-gold{padding:13px 18px;font-size:15px}
+  .search{height:50px}.search kbd{display:none}
+  .main{padding-top:28px}
+  .tabs{flex-wrap:wrap;gap:8px}
+  .tab{padding:12px 16px;font-size:15px;height:42px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;height:auto}
+  .stat{padding:16px 8px;border-bottom:1px solid var(--line)}
+  .stat:nth-child(2n){border-right:0}
+  .stat.bi{grid-column:1/-1;flex-direction:row;gap:10px;padding:12px;border:0}
+  .stat.bi span{margin-top:0}
+  .cards{grid-template-columns:1fr;gap:14px}
+  .card{min-height:0;padding:20px}
+  .card h3{margin-top:16px}
+  .foot-brand .tag{flex-basis:100%}
+  .login-field{font-size:16px}
+}
