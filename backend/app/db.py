@@ -1,4 +1,4 @@
-"""PostgreSQL connection pool and schema for the chat backend: users, login sessions, messages.
+"""PostgreSQL connection pool and schema for the chat backend: users, sessions, messages, avatars.
 DATABASE_URL comes from the environment or backend/.env; every connection runs in autocommit."""
 import os
 from collections.abc import Iterator
@@ -40,6 +40,13 @@ CREATE TABLE IF NOT EXISTS messages (
     created_at    timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS messages_pair ON messages (sender_id, recipient_id, id);
+
+CREATE TABLE IF NOT EXISTS avatars (
+    user_id       bigint      PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    image         bytea       NOT NULL CHECK (octet_length(image) <= 2097152),
+    content_type  text        NOT NULL,
+    updated_at    timestamptz NOT NULL DEFAULT now()
+);
 """
 
 _pool: ConnectionPool | None = None
