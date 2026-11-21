@@ -16,6 +16,7 @@ import {
   ChatViewport,
   type ChatSubmitEvent,
 } from "@/components/ui/chat"
+import WindMap from "@/components/ui/wind-map"
 
 type User = { id: number; username: string }
 
@@ -35,6 +36,9 @@ type Message = {
 }
 
 const POLL_MS = 2000
+
+// Module-level so WindMap's effect sees a stable array and doesn't restart on each render.
+const WIND_COLORS: [string, string, string, string] = ["#070a10", "#2b3d5c", "#7d9cc8", "#f0d9b5"]
 
 const fromApi = (m: ApiMessage): Message => ({
   id: m.id,
@@ -104,9 +108,9 @@ export default function ChatScreen({ me, peer, onLogout }: ChatScreenProps) {
   }
 
   return (
-    <div className="dark bg-background text-foreground flex h-dvh w-full flex-col">
+    <WindMap colors={WIND_COLORS} className="dark text-foreground h-dvh w-full">
       <Chat onSubmit={handleSubmit}>
-        <div className="mx-auto flex min-h-0 w-full max-w-2xl flex-1 flex-col gap-3 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:gap-4 sm:px-4 sm:py-6">
+        <div className="mx-auto flex h-full min-h-0 w-full max-w-2xl flex-col gap-3 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:gap-4 sm:px-4 sm:py-6">
           <header className="flex items-center gap-3 px-1">
             <ChatMessageAvatar
               className="size-9 self-center"
@@ -128,7 +132,7 @@ export default function ChatScreen({ me, peer, onLogout }: ChatScreenProps) {
             </button>
           </header>
 
-          <ChatViewport className="min-h-0 flex-1 px-3 sm:px-4">
+          <ChatViewport className="bg-card/55 min-h-0 flex-1 px-3 backdrop-blur-[2px] sm:px-4">
             <ChatMessages className="w-full py-3">
               <div className="text-muted-foreground my-6 text-center text-xs">
                 {peer ? `Chat started with ${peerName}` : "The other person hasn't been set up yet"}
@@ -150,7 +154,7 @@ export default function ChatScreen({ me, peer, onLogout }: ChatScreenProps) {
           </ChatViewport>
 
           {error && <p className="text-destructive px-1 text-xs" role="alert">{error}</p>}
-          <ChatInputArea>
+          <ChatInputArea className="bg-background/70 backdrop-blur-sm">
             <ChatInputField
               multiline
               placeholder={`Message ${peerName}`}
@@ -164,6 +168,6 @@ export default function ChatScreen({ me, peer, onLogout }: ChatScreenProps) {
           </ChatInputArea>
         </div>
       </Chat>
-    </div>
+    </WindMap>
   )
 }
