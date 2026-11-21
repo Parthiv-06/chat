@@ -145,3 +145,7 @@ h1{margin-top:18px;font-size:43px;font-weight:800;letter-spacing:-.02em;line-hei
   .foot-brand .tag{flex-basis:100%}
   .login-field{font-size:16px}
 }
+@media(max-width:360px){
+  .menu-btn{display:none}
+  .nav-inner{padding:0 12px}
+}

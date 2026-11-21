@@ -62,20 +62,19 @@ export default function ChatScreen({ me, peer, onLogout }: ChatScreenProps) {
   const [messages, setMessages] = React.useState<Message[]>([])
   const [input, setInput] = React.useState("")
   const [error, setError] = React.useState("")
-  const lastId = React.useRef<number | undefined>(undefined)
+  // Advanced only by polls: a sent message's id can be newer than one the poll hasn't fetched yet.
+  const lastPolledId = React.useRef<number | undefined>(undefined)
   const peerName = peer?.username ?? "them"
-
-  React.useEffect(() => {
-    lastId.current = messages.at(-1)?.id
-  }, [messages])
 
   React.useEffect(() => {
     let cancelled = false
     let timer: ReturnType<typeof setTimeout>
     const tick = async () => {
       try {
-        const incoming: ApiMessage[] = await listMessages(lastId.current)
-        if (!cancelled) setMessages((prev) => merge(prev, incoming))
+        const incoming: ApiMessage[] = await listMessages(lastPolledId.current)
+        if (cancelled) return
+        if (incoming.length) lastPolledId.current = incoming[incoming.length - 1].id
+        setMessages((prev) => merge(prev, incoming))
       } catch {
         // Offline or server restarting: keep what's on screen and try again next tick.
       }
